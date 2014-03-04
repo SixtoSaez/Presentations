@@ -1,0 +1,51 @@
+From: http://www.danielmiessler.com/study/vim/
+
+Why Vim
+    
+    I believe people should use vim for the following three reasons:
+    It's ubiquitous. You don't have to worry about learning a new editor on various boxes.
+    It's scalable. You can use it just to edit config files or it can become your entire writing platform.
+    It's powerful. Because it works like a language vim takes you from frustrated to demigod very quickly.
+
+Vim Mastery
+
+    Levels of mastery
+    Level 0: not knowing about vim
+    Level 1: knows vim basics
+    Level 2: knows visual mode
+    Level 3: knows various motions
+    Level 4: not needing visual mode
+
+Vim Basics
+
+    Help I've fallen into vi and I can't get out
+    Modes:
+        insert - what every other editor normally works in
+        normal - (grey matter intensive) keyboard shortcuts to the Vim editor commands
+        visual - a subset of normal mode specifically used to select text
+        Ex     - another command mode to pass the Ex editor commands such as :q!
+
+Code editing:
+
+    // Simple editing (commands zA, j, k, h, l, x, r, R, y)
+    var myModule = myModule || {};
+    myModule.myValue = 123;
+    myModule.someAction = function (someDefault) {
+        var self = this, myLocalNumber = 0;
+        self.myValue = self.myValue || someDefault;
+    }
+
+If there is time:
+
+Vim Plug-ins
+    "My plugins
+    conque_2.3
+    nerdtree
+    rainbow_parentheses.vim
+    syntastic
+    vim-autoformat
+    vim-colors-MyColors
+    vim-easymotion
+
+Vim Configuration
+    _vimrc file
