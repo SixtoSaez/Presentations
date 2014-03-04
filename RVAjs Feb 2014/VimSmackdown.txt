@@ -2,7 +2,7 @@ From: http://www.danielmiessler.com/study/vim/
 
 Why Vim
     
-    I believe people should use vim for the following three reasons:
+    Daniel Miessler believes people should use vim for the following three reasons:
     It's ubiquitous. You don't have to worry about learning a new editor on various boxes.
     It's scalable. You can use it just to edit config files or it can become your entire writing platform.
     It's powerful. Because it works like a language vim takes you from frustrated to demigod very quickly.
@@ -27,7 +27,7 @@ Vim Basics
 
 Code editing:
 
-    // Simple editing (commands zA, j, k, h, l, x, r, R, y)
+    // Simple editing (commands j, k, h, l, x, u, <C-r>, r, R, i, y, zA)
     var myModule = myModule || {};
     myModule.myValue = 123;
     myModule.someAction = function (someDefault) {
@@ -39,13 +39,13 @@ If there is time:
 
 Vim Plug-ins
     "My plugins
-    conque_2.3
-    nerdtree
-    rainbow_parentheses.vim
-    syntastic
-    vim-autoformat
     vim-colors-MyColors
+    rainbow_parentheses.vim
+    vim-autoformat
+    syntastic
+    nerdtree
+    conque_2.3
     vim-easymotion
 
 Vim Configuration
-    _vimrc file
+    _vimrc settings file

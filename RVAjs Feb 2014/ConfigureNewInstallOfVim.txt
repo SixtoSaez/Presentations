@@ -1,0 +1,14 @@
+mkdir .vim/bundle
+Copy: https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim to ~\vim74\autoload
+Edit _vimrc to add: call pathogen#infect('~/.vim/bundle/{}')
+Good _vimrc start: git clone https://github.com/tpope/vim-sensible.git
+
+// jslint like plug-in
+npm install -g jshint
+git clone https://github.com/scrooloose/syntastic.git
+git clone https://github.com/Chiel92/vim-autoformat.git
+
+git clone https://github.com/kien/rainbow_parentheses.vim
+git clone https://github.com/scrooloose/nerdtree.git
+git clone https://github.com/Lokaltog/vim-easymotion.git
+conqueue: http://www.vim.org/scripts/script.php?script_id=2771 !tested with powershell only
