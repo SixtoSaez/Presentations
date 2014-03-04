@@ -1,0 +1,61 @@
+" System vimrc file for Mac OS X
+" Author:  Sixto from original from Benji Fisher <benji@member.AMS.org>
+
+" Note:  Do not move this to the gvimrc file, else this value of $PATH will
+" not be available to plugin scripts.
+
+set nocompatible
+"set guifont=Bitstream_Vera_Sans_Mono:h13:a
+set guifont=Bitstream_Vera_Sans_Mono:h14
+set nowrap
+set ignorecase
+set makeprg=gcc\ -fnested-functions\ -framework\ Foundation\ %\ -o\ %<\ -l\ objc
+"set makeprg=gcc\ %\ -o\ ~/work/objc/prog1\ -l\ objc 
+set viminfo='1000,f1,:100,/100,%
+set history=100
+set guioptions+=b
+set relativenumber 
+set directory=~/.vim/tmp//,/tmp
+set undofile
+set undodir=$HOME/persistentUndo
+set undolevels=100
+set undoreload=1000
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set autoindent
+set hlsearch
+set incsearch
+"
+"Execute these after an upgrade to allow running of the app:
+"
+">> remove from GateKeeper quarantine: xattr -d com.apple.quarantine MacVim.app
+"
+""""""""""""""""""""""""""""" 
+" => Status line 
+""""""""""""""""""""""""""""""
+"set cmdheight=2
+" Always show the status line 
+set laststatus=2 
+" Format the status line 
+set statusline=\ %f\ \ PWD:\ %r%{getcwd()}%h\ %<\ %h%m%r%=%-14.(%l,%v%)\ %P 
+" set statusline=%F%m%r%w\ [FORMAT=%{&FF}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%041,%04v][%p%%]\ [LEN=%L]
+"set statusline=%F%m%r%w\ {%Y}\ [col=%v\ ln=%l]
+
+execute pathogen#infect('~/.vim/bundle')
+
+syntax on
+
+filetype plugin indent on
+
+colorscheme MyColors
+
+let g:syntastic_javascript_checkers = ['jslint']
+
+map <C-n> :NERDTreeToggle<CR>
+
+"Shift arrow tweak:
+if has("gui_macvim")
+    let macvim_hig_shift_movement = 1
+endif

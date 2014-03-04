@@ -5,6 +5,7 @@ Good _vimrc start: git clone https://github.com/tpope/vim-sensible.git
 
 // jslint like plug-in
 npm install -g jshint
+npm install -g js-beautify
 git clone https://github.com/scrooloose/syntastic.git
 git clone https://github.com/Chiel92/vim-autoformat.git
 
