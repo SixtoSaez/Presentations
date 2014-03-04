@@ -1,0 +1,96 @@
+source $VIMRUNTIME/mswin.vim
+behave mswin
+
+let $VIM = "C:\\Program Files (x86)\\Vim"
+let $HOME = "C:\\Program Files (x86)\\Vim"
+
+""" General settings:
+set nocompatible
+set gfn=Bitstream\ Vera\ Sans\ Mono:h11:cANSI
+set nowrap
+set ignorecase
+set lines=58
+set columns=150
+set makeprg=gcc\ $*\ %\ -o\ %<\ -l\ objc
+set viminfo='1000,f1,:100,/100,%
+set history=100
+set guioptions+=b
+""" Triggers the weird 'line' numbers (VIM 7.4 hybrid mode)
+set relativenumber
+set number
+""" Replace 'backup' file with ~ in extension with something cleaner:
+set undofile
+set undodir=$HOME/persistentUndo
+set undolevels=100
+set undoreload=1000
+""" Set up tab/space conventions:
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set autoindent
+
+let g:ConqueTerm_PyExe = 'C:\Python27\python.exe'
+"""""Status line"""""""""
+" doesn't work well:set cmdheight=2
+" Always show the status line
+set laststatus=2
+" Format the status line
+"set statusline=\ %F%m%r%h\ %w\ \ PWD:\ %r%{getcwd()}%h\ %<\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+set statusline=\ %F%m%r%h\ %w\ \ %<\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+
+""""""Plug-ins""""""""""
+call pathogen#infect('~/.vim/bundle/{}')
+
+syntax enable
+filetype plugin indent on     " required for at least Syntastic
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+""set nofoldenable " to turn off folding
+set foldmethod=indent "for RVAjs demo
+
+nmap <C-n> :NERDTreeToggle<CR>
+nmap <A-k> :Autoformat<CR>
+
+""" Color configs (order is important, goes after pathogen execution:
+set hlsearch
+set incsearch
+colorscheme MyColors
+highlight Cursor guifg=black guibg=white
+"These are the 'default' values for guicursor:
+"set guicursor=n-v-c:block-Cursor/lCursor
+"set guicursor=ve:ver35-Cursor
+"set guicursor=o:hor50-Cursor
+"set guicursor=i-ci:ver25-Cursor/lCursor
+"set guicursor=r-cr:hor20-Cursor/lCursor
+"set guicursor=sm:block-Cursor
+
+set diffexpr=MyDiff()
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let eq = ''
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      let cmd = '""' . $VIMRUNTIME . '\diff"'
+      let eq = '"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+endfunction
+
