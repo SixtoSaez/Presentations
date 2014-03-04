@@ -1,3 +1,5 @@
+Code samples: https://github.com/SixtoSaez?tab=repositories
+
 From: http://www.danielmiessler.com/study/vim/
 
 Why Vim
