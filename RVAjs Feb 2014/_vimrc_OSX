@@ -54,6 +54,7 @@ colorscheme MyColors
 let g:syntastic_javascript_checkers = ['jslint']
 
 map <C-n> :NERDTreeToggle<CR>
+map <C-k> :Autoformat<CR>
 
 "Shift arrow tweak:
 if has("gui_macvim")
