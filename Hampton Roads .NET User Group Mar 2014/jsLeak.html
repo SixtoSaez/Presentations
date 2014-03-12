@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<body>
+    <button id="start_button" onclick="startButtonClick()">Start</button>
+    <button id="stop_button" onclick="stopButtonClick()">Stop</button>
+    <button id="leak_button" onclick="toggleLeakClick()">Toggle Leak</button>
+    <script type="text/javascript" charset="utf-8">
+        // This is a global object which this demo demonstrates the EVILS thereof:
+        var leak = null;
+
+        function startButtonClick() {
+            if (leak !== null) {
+                console.log("Already exists");
+                return;
+            }
+
+            console.log("Initialize on Start click");
+            leak = new Leaker();
+            leak.init();
+            leak.name = "Instance 1";
+        }
+
+        function stopButtonClick() {
+            console.log("set null on Stop click");
+            leak.stop();
+            // Dispose of leaker instance:
+            leak = null;
+        }
+
+        function toggleLeakClick() {
+            console.log("toggle leak to " + !leak.causeLeak);
+            leak.causeLeak = !leak.causeLeak;
+        }
+
+        function repeat(pattern, count) {
+            if (count < 1) return '';
+            var result = '';
+            while (count > 0) {
+                if (count & 1) result += pattern;
+                count >>= 1, pattern += pattern;
+            }
+            return result;
+        }
+
+         // Could be object literal: var Leaker = {};
+        var Leaker = function() {};
+
+        Leaker.prototype = {
+            init: function() {
+                console.log("Initialize a new one!!");
+                var result = new Array(100);
+                for (var i = 0; i < result.length; ++i) {
+                    result[i] = repeat("ab", i);
+                }
+                this.causeLeak = false;
+                this.payload = result;
+                this._interval = null;
+                this.start();
+            },
+            start: function() {
+                console.log("Start");
+                var self = this;
+                self._interval = setInterval(function() {
+                    console.log("setInterval");
+                    self.onInterval(self.name);
+                }, 1000);
+            },
+            onInterval: function(instanceName) {
+                console.log("Interval: " + instanceName);
+            },
+            stop: function() {
+                console.log("Stop");
+                if (this._interval !== null) {
+                    if (this.causeLeak) {
+                        console.log("leaking...");
+                        // This WILL cause a memory leak:
+                        this._interval = null;
+                    } else {
+                        console.log("nice & tidy");
+                        // The correct way to release a timer:
+                        clearInterval(this._interval);
+                    }
+                }
+            }
+        };
+    </script>
+</body>
+
+</html>
