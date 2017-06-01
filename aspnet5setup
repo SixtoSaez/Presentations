@@ -1,0 +1,30 @@
+Sixtos-MacBook-Pro:OsxDemo sf_saez$ yo aspnet
+
+     _-----_
+    |       |    .--------------------------.
+    |--(o)--|    |      Welcome to the      |
+   `---------´   |    marvellous ASP.NET    |
+    ( _´U`_ )    |        generator!        |
+    /___A___\    '--------------------------'
+     |  ~  |     
+   __'.___.'__   
+ ´   `  |° ´ Y ` 
+
+? What type of application do you want to create? Web Application
+? What's the name of your ASP.NET application? WebApp
+
+     info ... Fetching http://github.com/ligershark/aspnet_vnext_samples/archive/master.tar.gz ...
+     info This might take a few moments
+..✔ Done in /Users/sf_saez/.cache/yeoman/ligershark/aspnet_vnext_samples/master
+
+   create NuGet.config
+   create global.json
+   create WebApp/Startup.cs
+   create WebApp/project.json
+/Users/sf_saez/.cache/yeoman
+
+Your project is now created, you can use the following commands to get going
+    kpm restore
+    kpm build
+    kpm run  for console projects
+    k kestrel or k web for web projects

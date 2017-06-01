@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DOM Node leaker</title>
+</head>
+
+<body>
+
+    <h1>From Google Profile demos --> Example 6: Leaking DOM nodes</h1>
+    <p>https://developers.google.com/chrome-developer-tools/docs/javascript-memory-profiling</p>
+
+    <ol>
+        <li>Open Timeline tab.</li>
+
+        <li>Start recording activty.</li>
+
+        <li>Repeat the next steps and watch the Timeline
+
+            <ol>
+                <li>Create some nodes</li>
+
+                <li>GC</li>
+            </ol>
+        </li>
+
+        <li>Open Profiler tab.</li>
+
+        <li>Take base line snapshot</li>
+
+        <li>Repeat step 3 above</li>
+
+        <li>Take final snapshot</li>
+    </ol>
+
+    <p>
+        <button onclick="createNodes()">Create nodes (some of them leaked)</button>
+    </p>
+
+    <script>
+        'use strict';
+
+        var leakedNodes = [];
+
+        function createNode(text) {
+            var div = document.createElement('div'),
+                innerDiv = document.createElement('div'),
+                buf;
+            buf = document.createTextNode(text + ' - ' + new Date().toTimeString());
+            innerDiv.appendChild(buf);
+            div.appendChild(innerDiv);
+            return div;
+        }
+
+        function createLeakedNodes() {
+            var i;
+            for (i = 0; i < 20; i++) {
+                leakedNodes.push(createNode('Leaked:' + i));
+            }
+        }
+
+        function createGCNodes() {
+            var i;
+            for (i = 0; i < 20; i++) {
+                createNode('Collected:' + i);
+            }
+        }
+
+        function createNodes() {
+            createLeakedNodes();
+            createGCNodes();
+        }
+    </script>
+</body>
+
+</html>
